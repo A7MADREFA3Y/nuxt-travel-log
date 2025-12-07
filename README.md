@@ -1,11 +1,12 @@
 # Nuxt Minimal Starter
 
-A full stack application built with Nuxt that allows users to keep track of all the places they've been 
+A full stack application built with Nuxt that allows users to keep track of all the places they've been
+
 ## Setup
 
 Make sure to install dependencies:
 
-```bash
+````bash
 
 ## Development Server
 
@@ -13,7 +14,7 @@ Start the development server on `http://localhost:3000`:
 
 ```bash
 pnpm dev
-```
+````
 
 ## Production
 
@@ -25,6 +26,7 @@ pnpm build
 
 Locally preview production build:
 
-```bash
+````bash
 pnpm preview
 ```# nuxt-travel-log
+````
