@@ -21,11 +21,14 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.4.2",
+    "@iconify-json/tabler": "^1.2.23",
+    "daisyui": "^5.5.14",
     "eslint": "^9.39.1",
     "eslint-plugin-format": "^1.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "nuxt": "3.12.4"
+    "nuxt": "3.12.4",
+    "nuxt-icon": "1.0.0-beta.7"
   },
   "lint-staged": {
     "*": "pnpm lint"
