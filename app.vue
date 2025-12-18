@@ -5,6 +5,6 @@
   <button class="btn btn-secondary">
     view Map  
     <Icon name="tabler:map-pin-pause" />
-
+    
 </button>
 </template>
