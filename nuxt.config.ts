@@ -1,5 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
+import "./lib/env";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import { defineNuxtConfig } from 'nuxt/config'
@@ -7,7 +9,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-16',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/icon'],
+  modules: ['@nuxt/eslint', '@nuxt/icon', '@nuxtjs/color-mode'],
   css: ['~/assets/css/main.css'],
   eslint: {
     config: {
@@ -19,4 +21,7 @@ export default defineNuxtConfig({
       tailwindcss(),
       ],
   },
+    colorMode:{
+          dataValue:"theme",
+}
 })
