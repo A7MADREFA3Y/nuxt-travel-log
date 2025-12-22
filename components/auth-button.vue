@@ -1,23 +1,16 @@
 <script lang="ts" setup>
-import { createAuthClient } from "better-auth/client"
-const authClient =  createAuthClient()
-const loading = ref(false)
+import { useAuthStore } from "~/stores/auth";
 
+// TODO: the Pinia is working but the state is always false
+const authStore = useAuthStore()
 
-async function signIn() {
-  loading.value = true
-  await authClient.signIn.social({
-    provider: "github",
-    callbackURL: "/dashboard",
-  });
-  loading.value = false
-}
 </script>
 
 <template>
-  <button :disabled="loading" class="btn btn-accent" @click="signIn">
+  <button @click="authStore.signIn" :disabled="authStore.loading" class="btn btn-accent" >
     sign In with GitHub
-    <span v-if="loading" class="loading loading-ring loading-md"></span>
-    <Icon v-else name="tabler:brand-github" size="24"/>
+    <span v-if="authStore.loading" class="loading loading-ring loading-md"></span>
+    <Icon v-else="authStore.loading" name="tabler:brand-github" size="24"/>
+    
   </button>
 </template>
