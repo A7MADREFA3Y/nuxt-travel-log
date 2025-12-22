@@ -11,10 +11,10 @@ export const auth = betterAuth({
         generateId: false,
     },
     socialProviders: {
-        ...(env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET && {
+        ...(env.CLIENT_ID_GITHUB && env.CLIENT_SECRET_GITHUB && {
             github: {
-                clientId: env.GITHUB_CLIENT_ID,
-                clientSecret: env.GITHUB_CLIENT_SECRET,
+                clientId: env.CLIENT_ID_GITHUB,
+                clientSecret: env.CLIENT_SECRET_GITHUB,
             }
         })
     },
