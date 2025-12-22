@@ -17,6 +17,9 @@ jobs:
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
 
+      CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
+      CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
+
     steps:
       - uses: actions/checkout@v4
       - name: install pnpm
