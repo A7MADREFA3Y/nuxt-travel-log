@@ -16,9 +16,9 @@ jobs:
 
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
-#
-#      GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-#      GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+
+      CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
+      CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
 
     steps:
       - uses: actions/checkout@v4
