@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+
+import { useAuthStore } from '~/stores/auth';
+
+const AuthStore = useAuthStore();
+await AuthStore.init();
+
+</script>
+
 <template>
   <div class="flex min-h-screen flex-col">
     <AppNavBar/>
