@@ -17,15 +17,27 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.1.18(vite@5.4.21(@types/node@25.0.3)(lightningcss@1.30.2)(terser@5.44.1))
+      '@vee-validate/nuxt':
+        specifier: 4.15.0
+        version: 4.15.0(magicast@0.5.1)(vue@3.5.25(typescript@5.9.3))
+      '@vee-validate/zod':
+        specifier: 4.15.0
+        version: 4.15.0(vue@3.5.25(typescript@5.9.3))(zod@4.2.1)
       better-auth:
         specifier: 1.2.4
         version: 1.2.4(typescript@5.9.3)
       drizzle-orm:
         specifier: 0.40.1
         version: 0.40.1(@libsql/client@0.15.0)(gel@2.2.0)(kysely@0.27.6)
+      drizzle-zod:
+        specifier: 0.7.0
+        version: 0.7.0(drizzle-orm@0.40.1(@libsql/client@0.15.0)(gel@2.2.0)(kysely@0.27.6))(zod@4.2.1)
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
+      vee-validate:
+        specifier: 4.15.0
+        version: 4.15.0(vue@3.5.25(typescript@5.9.3))
       vue:
         specifier: ^3.5.25
         version: 3.5.25(typescript@5.9.3)
@@ -2221,6 +2233,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@vee-validate/nuxt@4.15.0':
+    resolution: {integrity: sha512-AhQHPLxH4tTf35op+ifkBhnnRwv/EzT8Fi9PQlEwKyLGZgepFQO1qTm6IyaA6aoSKcFWHz3R3hyMrMQdXbiOxQ==}
+
+  '@vee-validate/zod@4.15.0':
+    resolution: {integrity: sha512-MpvIKiyg9X5yD8bJW0no2AU7wtR2T5mrvD9tuPRiie951sU2n6QKgMV38qKKOiqFBCxsMSjIuLLLV3V5kVE4nQ==}
+    peerDependencies:
+      zod: ^3.24.0
+
   '@vercel/nft@0.30.4':
     resolution: {integrity: sha512-wE6eAGSXScra60N2l6jWvNtVK0m+sh873CpfZW4KI2v8EHuUQp+mSEi4T+IcdPCSEDgCdAS/7bizbhQlkjzrSA==}
     engines: {node: '>=18'}
@@ -3007,6 +3027,12 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-zod@0.7.0:
+    resolution: {integrity: sha512-xgCRYYVEzRkeXTS33GSMgoowe3vKsMNBjSI+cwG1oLQVEhAWWbqtb/AAMlm7tkmV4fG/uJjEmWzdzlEmTgWOoQ==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.0'
+      zod: '>=3.0.0'
 
   duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
@@ -5243,6 +5269,10 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
 
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
+    engines: {node: '>=16'}
+
   type-fest@5.3.1:
     resolution: {integrity: sha512-VCn+LMHbd4t6sF3wfU/+HKT63C9OoyrSIf4b+vtWHpt2U7/4InZG467YDNMFMR70DdHjAdpPWmw2lzRdg0Xqqg==}
     engines: {node: '>=20'}
@@ -5429,6 +5459,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  vee-validate@4.15.0:
+    resolution: {integrity: sha512-PGJh1QCFwCBjbHu5aN6vB8macYVWrajbDvgo1Y/8fz9n/RVIkLmZCJDpUgu7+mUmCOPMxeyq7vXUOhbwAqdXcA==}
+    peerDependencies:
+      vue: ^3.4.26
 
   vite-hot-client@0.2.4:
     resolution: {integrity: sha512-a1nzURqO7DDmnXqabFOliz908FRmIppkBKsJthS8rbe8hBEXwEwe4C3Pp33Z1JoFCYfVL4kTOMLKk0ZZxREIeA==}
@@ -7776,6 +7811,23 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+  '@vee-validate/nuxt@4.15.0(magicast@0.5.1)(vue@3.5.25(typescript@5.9.3))':
+    dependencies:
+      '@nuxt/kit': 3.20.2(magicast@0.5.1)
+      local-pkg: 0.5.1
+      vee-validate: 4.15.0(vue@3.5.25(typescript@5.9.3))
+    transitivePeerDependencies:
+      - magicast
+      - vue
+
+  '@vee-validate/zod@4.15.0(vue@3.5.25(typescript@5.9.3))(zod@4.2.1)':
+    dependencies:
+      type-fest: 4.41.0
+      vee-validate: 4.15.0(vue@3.5.25(typescript@5.9.3))
+      zod: 4.2.1
+    transitivePeerDependencies:
+      - vue
+
   '@vercel/nft@0.30.4(rollup@4.53.5)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.3
@@ -8552,6 +8604,11 @@ snapshots:
       '@libsql/client': 0.15.0
       gel: 2.2.0
       kysely: 0.27.6
+
+  drizzle-zod@0.7.0(drizzle-orm@0.40.1(@libsql/client@0.15.0)(gel@2.2.0)(kysely@0.27.6))(zod@4.2.1):
+    dependencies:
+      drizzle-orm: 0.40.1(@libsql/client@0.15.0)(gel@2.2.0)(kysely@0.27.6)
+      zod: 4.2.1
 
   duplexer@0.1.2: {}
 
@@ -11298,6 +11355,8 @@ snapshots:
 
   type-fest@0.21.3: {}
 
+  type-fest@4.41.0: {}
+
   type-fest@5.3.1:
     dependencies:
       tagged-tag: 1.0.0
@@ -11532,6 +11591,12 @@ snapshots:
   valibot@1.0.0-beta.15(typescript@5.9.3):
     optionalDependencies:
       typescript: 5.9.3
+
+  vee-validate@4.15.0(vue@3.5.25(typescript@5.9.3)):
+    dependencies:
+      '@vue/devtools-api': 7.7.9
+      type-fest: 4.41.0
+      vue: 3.5.25(typescript@5.9.3)
 
   vite-hot-client@0.2.4(vite@5.4.21(@types/node@25.0.3)(lightningcss@1.30.2)(terser@5.44.1)):
     dependencies:
