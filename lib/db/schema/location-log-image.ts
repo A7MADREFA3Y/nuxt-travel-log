@@ -10,6 +10,6 @@ export const locationLogImage = sqliteTable("locationLogImage", {
     locationLogId: int().notNull().references(() => locationLog.id),
     userId: int().notNull().references(() => user.id),
     createdAt: int().notNull().$default(() => Date.now()),
-    updateAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
+    updatedAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
 
 })

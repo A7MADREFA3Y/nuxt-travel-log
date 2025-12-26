@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1766269710413,
-      "tag": "0000_previous_guardian",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1766315253489,
-      "tag": "0001_bitter_callisto",
+      "when": 1766750756532,
+      "tag": "0000_useful_gateway",
       "breakpoints": true
     }
   ]
