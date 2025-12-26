@@ -1,0 +1,18 @@
+<script lang="ts" setup>
+
+</script>
+
+<template>
+    <div p-4>
+        <h2 class="text-2xl">
+            Locations
+        </h2>
+        <div class="flex flex-col gap-2 mt-4">
+        <p>Add a Location to get started</p>
+        <NuxtLink to="/dashboard/add" class="btn btn-primary w-40">
+            add Location
+            <Icon name="tabler:circle-plus-filled" size="24"/>
+        </NuxtLink>
+        </div>
+    </div>
+</template>
