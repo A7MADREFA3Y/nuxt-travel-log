@@ -13,7 +13,10 @@ export default defineNuxtConfig({
             '@nuxt/icon',
             '@nuxtjs/color-mode',
             '@pinia/nuxt',
-            '@vee-validate/nuxt'],
+            '@vee-validate/nuxt',
+            'nuxt-csurf'
+          ],
+
   css: ['~/assets/css/main.css'],
   eslint: {
     config: {
