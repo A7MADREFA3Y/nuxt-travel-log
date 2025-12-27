@@ -25,10 +25,13 @@ onMounted(() =>{
             class="card card-compact bg-base-300 h-40 w-72"
             >
                 
-                <div class="card-body">
+                <div class="card-body min-h-[100px] max-h-[200px] overflow-y-auto">
                     <h3 class="text-xl">{{ location.name }}</h3>
-                    <p>{{ location.description }}</p>
+                    <p class="leading-relaxed break-words">
+                        {{ location.description }}
+                    </p>
                 </div>
+
             </div>
         </div>
         <div v-else class="flex flex-col gap-2 mt-4">
