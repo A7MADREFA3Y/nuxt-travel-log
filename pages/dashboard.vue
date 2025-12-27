@@ -1,12 +1,17 @@
 <script lang="ts" setup>
+import { useLocationStore } from '~/stores/location';
 import { useSidebarStore } from '~/stores/sidebar';
 
-  const isSidebarOpen = ref(true); 
-
-  const sidebarStore = useSidebarStore();
+const isSidebarOpen = ref(true); 
+const route = useRoute();
+const sidebarStore = useSidebarStore();
+const locationStore = useLocationStore();
 
 onMounted(() => {
   isSidebarOpen.value = localStorage.getItem("isSidebarOpen") === "true";
+  if(route.path !== "/dashboard"){
+    locationStore.refresh();
+  }
 });
 
 function toggleSidebar() {

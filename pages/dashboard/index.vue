@@ -1,28 +1,13 @@
 <script lang="ts" setup>
-import { useSidebarStore } from '~/stores/sidebar';
+import { storeToRefs } from 'pinia';
+import { useLocationStore } from '~/stores/location';
 
-const { data, status } = await useFetch<Array<{ 
-    id: string;
-    name: string;
-    description: string
- }>>("/api/locations", {
-    lazy: true,
-});
+const locationStore = useLocationStore();
+const { locations, status } = storeToRefs(locationStore);
 
-const sidebarStore = useSidebarStore();
-
-watchEffect(() => {
-    if(data.value){
-        sidebarStore.sidebarItems = data.value.map(location => ({
-            id:`location-${location.id}`,
-            label: location.name,
-            icon: "tabler:map-pin-filled",
-            href: "#",
-        }));
-    } 
-    sidebarStore.loading = status.value === "pending";    
-});
-
+onMounted(() =>{
+    locationStore.refresh()
+})
 </script>
 
 <template>
@@ -33,9 +18,9 @@ watchEffect(() => {
         <div v-if="status === 'pending'">
             <span class="loading loading-ring loading-md" />
         </div>
-        <div v-else-if="data && data.length > 0" class="flex flex-wrap mt-4 gap-2">
+        <div v-else-if="locations && locations.length > 0" class="flex flex-wrap mt-4 gap-2">
             <div 
-            v-for="location in data" 
+            v-for="location in locations" 
             :key="location.id" 
             class="card card-compact bg-base-300 h-40 w-72"
             >
