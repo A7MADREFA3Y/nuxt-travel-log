@@ -1,7 +1,28 @@
 <script lang="ts" setup>
-const { data, status } = await useFetch("/api/locations", {
+import { useSidebarStore } from '~/stores/sidebar';
+
+const { data, status } = await useFetch<Array<{ 
+    id: string;
+    name: string;
+    description: string
+ }>>("/api/locations", {
     lazy: true,
 });
+
+const sidebarStore = useSidebarStore();
+
+watchEffect(() => {
+    if(data.value){
+        sidebarStore.sidebarItems = data.value.map(location => ({
+            id:`location-${location.id}`,
+            label: location.name,
+            icon: "tabler:map-pin-filled",
+            href: "#",
+        }));
+    } 
+    sidebarStore.loading = status.value === "pending";    
+});
+
 </script>
 
 <template>
