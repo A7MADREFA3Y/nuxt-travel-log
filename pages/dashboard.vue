@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  
 import { useLocationStore } from '~/stores/location';
 import { useSidebarStore } from '~/stores/sidebar';
 
