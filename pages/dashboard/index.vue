@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-const { data, status } = await useFetch("/api/locations", {
-    lazy: true,
-});
+import { storeToRefs } from 'pinia';
+import { useLocationStore } from '~/stores/location';
+
+const locationStore = useLocationStore();
+const { locations, status } = storeToRefs(locationStore);
+
+onMounted(() =>{
+    locationStore.refresh()
+})
 </script>
 
 <template>
@@ -12,17 +18,20 @@ const { data, status } = await useFetch("/api/locations", {
         <div v-if="status === 'pending'">
             <span class="loading loading-ring loading-md" />
         </div>
-        <div v-else-if="data && data.length > 0" class="flex flex-wrap mt-4 gap-2">
+        <div v-else-if="locations && locations.length > 0" class="flex flex-wrap mt-4 gap-2">
             <div 
-            v-for="location in data" 
+            v-for="location in locations" 
             :key="location.id" 
             class="card card-compact bg-base-300 h-40 w-72"
             >
                 
-                <div class="card-body">
+                <div class="card-body min-h-[100px] max-h-[200px] overflow-y-auto">
                     <h3 class="text-xl">{{ location.name }}</h3>
-                    <p>{{ location.description }}</p>
+                    <p class="leading-relaxed break-words">
+                        {{ location.description }}
+                    </p>
                 </div>
+
             </div>
         </div>
         <div v-else class="flex flex-col gap-2 mt-4">

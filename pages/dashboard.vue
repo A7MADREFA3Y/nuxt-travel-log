@@ -1,8 +1,18 @@
 <script lang="ts" setup>
-  const isSidebarOpen = ref(true); 
+  
+import { useLocationStore } from '~/stores/location';
+import { useSidebarStore } from '~/stores/sidebar';
+
+const isSidebarOpen = ref(true); 
+const route = useRoute();
+const sidebarStore = useSidebarStore();
+const locationStore = useLocationStore();
 
 onMounted(() => {
   isSidebarOpen.value = localStorage.getItem("isSidebarOpen") === "true";
+  if(route.path !== "/dashboard"){
+    locationStore.refresh();
+  }
 });
 
 function toggleSidebar() {
@@ -20,10 +30,39 @@ function toggleSidebar() {
         <Icon v-else name="tabler:chevron-right" size="32"/>
       </div>
       <div class="flex flex-col gap-2">
-        <SidebarButton :showLabel="isSidebarOpen" label="Locations" icon="tabler:map" href="/dashboard" /> 
-        <SidebarButton :showLabel="isSidebarOpen" label="Add Location" icon="tabler:circle-plus-filled" href="/dashboard/add"/>         
+        <SidebarButton
+        :showLabel="isSidebarOpen" 
+        label="Locations" 
+        icon="tabler:map" 
+        href="/dashboard"
+        />
+        <SidebarButton 
+        :showLabel="isSidebarOpen" 
+        label="Add Location" 
+        icon="tabler:circle-plus-filled" 
+        href="/dashboard/add"
+        />          
+        <div v-if=" sidebarStore.loading || sidebarStore.sidebarItems.length" class="divider" />
+        <div v-if="sidebarStore.loading" class="px-4">
+          <div class="skeleton h-4 w-full" />
+        </div>
+          <div v-if="!sidebarStore.loading && sidebarStore.sidebarItems.length" class="flex flex-col">
+            <SidebarButton
+          v-for="item in sidebarStore.sidebarItems"
+          :showLabel="isSidebarOpen" 
+          :key="item.id"
+          :label="item.label"
+          :icon="item.icon"
+          :href="item.href"
+          />
+        </div>
         <div class="divider">OR</div>
-        <SidebarButton :showLabel="isSidebarOpen" label="Sign Out" icon="tabler:logout-2" href="/sign-out"/> 
+        <SidebarButton 
+        :showLabel="isSidebarOpen" 
+        label="Sign Out" 
+        icon="tabler:logout-2" 
+        href="/sign-out"
+        /> 
       </div>
     </div>
     <div class="flex-1 ">
