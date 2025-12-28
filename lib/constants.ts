@@ -1,0 +1,1 @@
+export const CENTRAL_GERMANY = [10.4515, 51.1657];
