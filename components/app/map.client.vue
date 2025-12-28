@@ -13,6 +13,10 @@ const style = computed(() =>
 
 const center = CENTRAL_GERMANY;
 const zoom = 5;
+
+onMounted(() =>{
+  mapStore.init();
+})
 </script>
 
 
