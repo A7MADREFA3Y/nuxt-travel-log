@@ -29,6 +29,11 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
       ],
+      optimizeDeps:{
+        include: [
+          "maplibre-gl",
+        ]
+      }
   },
     colorMode:{
           dataValue:"theme",
