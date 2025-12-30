@@ -1,11 +1,14 @@
 <script lang="ts" setup>
+import { Color } from 'maplibre-gl';
+
     
     const props = defineProps<{
         label: string;
         icon: string;
         href: string;
-        showLabel: boolean
-    }>();
+        showLabel: boolean;
+        iconColor?: 'text-accent' | 'text-primary' | 'text-secondary';
+      }>();
 
 const route =useRoute();
 </script>
@@ -16,7 +19,10 @@ const route =useRoute();
 <div class="tooltip-right" :data-tip="showLabel ? undefined : props.label" :class="{tooltip: !showLabel}">
     <NuxtLink :to="props.href" :class="{'bg-base-300': route.path === props.href, 'justify-center': !showLabel, 'justify-start': showLabel  }"
     class="flex gap-2 p-2 hover:bg-base-300 hover:cursor-pointer flex-nowrap">
-        <Icon :name="props.icon" size="24"/>
+        <Icon 
+        :name="props.icon" 
+        size="24" 
+        :class="iconColor"/>
         
         <Transition name="grow">    
         <span v-if="showLabel">{{ props.label }}</span>
