@@ -118,6 +118,9 @@ onBeforeRouteLeave(() => {
       <p>
         Drag the <Icon name="tabler:map-pin-filled" class="text-warning" /> marker to your desired location.
       </p>
+      <p>
+        Or Double click on the Map 
+      </p>
       <p class="text-xs text-gray-400">
         Current location: {{ formatNumber(controlledValues.lat) }}, {{ formatNumber(controlledValues.long) }}
       </p>
