@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { SearchSchema } from '~/lib/zod-schema';
 import type { NominatimResult } from "~/lib/types"
+import { useTemplateRef } from 'vue';
 
 const emit = defineEmits<{
     resultSelected: [result: NominatimResult]
@@ -8,6 +9,8 @@ const emit = defineEmits<{
 
 
 const searchResults = ref<NominatimResult[]>([]);
+
+const form = useTemplateRef("form");
 
 async function onSubmit(query: Record<string, string>){
     try{
@@ -20,11 +23,21 @@ async function onSubmit(query: Record<string, string>){
         console.log(error);
     }
 }
+
+function setLocation(resutlt: NominatimResult) {
+    emit('resultSelected', resutlt);
+    searchResults.value = [];
+    if (form.value){
+        form.value.resetForm;
+    }
+}
+
 </script>
 
 <template>
     <div class="flex flex-col gap-2">
     <Form 
+        ref="form"
         v-slot="{ errors }"
         class="flex flex-col gap-2 items-center" 
         :validation-schema="toTypedSchema(SearchSchema)" 
@@ -66,7 +79,7 @@ async function onSubmit(query: Record<string, string>){
                      <div class="justify-end card-actions">
                         <button 
                         class="btn btn-primary btn-sm" 
-                        @click="emit('resultSelected', resutlt)"
+                        @click="setLocation(resutlt)"
                         >
                             Set Location
                             <Icon name="tabler:map-pin-share" size="20" />
