@@ -9,11 +9,12 @@ const emit = defineEmits<{
 
 
 const searchResults = ref<NominatimResult[]>([]);
-
 const form = useTemplateRef("form");
+const loading = ref(false);
 
 async function onSubmit(query: Record<string, string>){
     try{
+        loading.value = true;
         const resutlt = await $fetch('/api/search', {
             query,
     
@@ -22,6 +23,7 @@ async function onSubmit(query: Record<string, string>){
     }catch (error) {
         console.log(error);
     }
+        loading.value = false;
 }
 
 function setLocation(resutlt: NominatimResult) {
@@ -52,6 +54,7 @@ function setLocation(resutlt: NominatimResult) {
                     type="text"
                     name="q"
                     placeholder="Search for a Location" 
+                    :disabled="loading"
                     :class="{
                         'input-error': errors.q,
                     }"
@@ -61,11 +64,18 @@ function setLocation(resutlt: NominatimResult) {
                      {{ errors.q }}
                 </div>
             </div>
-                <button class="btn btn-neutral join-item">
-                    Search
+                <button 
+                class="btn btn-neutral join-item"
+                :disabled="loading"
+                >
+                
+                Search
                 </button>
             </div>
         </Form>
+        <div v-if="loading" class="flex justify-center">
+            <div class="loading loading-spinner loading-lg"> </div>
+        </div>
         <div 
             v-for="resutlt in searchResults" 
             :key="resutlt.place_id"
