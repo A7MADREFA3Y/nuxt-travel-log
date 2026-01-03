@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { FetchError } from "ofetch"
 import { SearchSchema } from '~/lib/zod-schema';
 import type { NominatimResult } from "~/lib/types"
 import { useTemplateRef } from 'vue';
@@ -11,6 +12,7 @@ const emit = defineEmits<{
 const searchResults = ref<NominatimResult[]>([]);
 const form = useTemplateRef("form");
 const loading = ref(false);
+const errorMessage = ref("");
 
 async function onSubmit(query: Record<string, string>){
     try{
@@ -20,8 +22,10 @@ async function onSubmit(query: Record<string, string>){
     
         })
         searchResults.value = resutlt
-    }catch (error) {
-        console.log(error);
+    
+    }catch (e) {
+        const error = e as FetchError
+        errorMessage.value = getFetchErrorMessage(error)
     }
         loading.value = false;
 }
@@ -38,7 +42,7 @@ function setLocation(resutlt: NominatimResult) {
 
 <template>
     <div class="flex flex-col gap-2">
-    <Form 
+        <Form 
         ref="form"
         v-slot="{ errors }"
         class="flex flex-col gap-2 items-center" 
@@ -73,6 +77,14 @@ function setLocation(resutlt: NominatimResult) {
                 </button>
             </div>
         </Form>
+        <div 
+        v-if="errorMessage"
+        role="alert" 
+        class="alert alert-error"
+        >
+            {{ errorMessage }}
+        </div>
+       
         <div v-if="loading" class="flex justify-center">
             <div class="loading loading-spinner loading-lg"> </div>
         </div>
