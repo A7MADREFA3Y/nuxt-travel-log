@@ -7,6 +7,7 @@ import { CENTRAL_GERMANY } from "~/lib/constants";
 import { InsertLocation } from "~/lib/db/schema";
 import { useMapStore } from '~/stores/map';
 import { useCsrf } from '#imports';
+import type { NominatimResult } from "~/lib/types";
 
 const router = useRouter();
 const mapStore = useMapStore();
@@ -53,6 +54,18 @@ function formatNumber(value?: number) {
     return 0;
   return value.toFixed(5);
 }
+
+function searchResultSelected( result: NominatimResult) {
+  setFieldValue("name", result.display_name)
+  mapStore.addedPoint = {
+    id: 1,
+    name: "Added Point",
+    description: "",
+    long: Number(result.lon),
+    lat: Number(result.lat),
+  };
+}
+
 
 effect(() => {
   if (mapStore.addedPoint) {
@@ -149,5 +162,7 @@ onBeforeRouteLeave(() => {
         </button>
       </div>
     </form>
+    <div class="divider"></div>
+    <AppPlaceSearch @result-selected="searchResultSelected" />
   </div>
 </template>
