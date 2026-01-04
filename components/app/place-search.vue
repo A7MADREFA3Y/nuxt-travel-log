@@ -22,7 +22,7 @@ async function onSubmit(query: Record<string, string>) {
     const results = await $fetch("/api/search", {
       query,
     });
-    searchResults.value = results;
+    searchResults.value = results as NominatimResult[];
   }
   catch (e) {
     const error = e as FetchError;

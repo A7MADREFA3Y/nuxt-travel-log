@@ -7,6 +7,7 @@ export const useLocationStore = defineStore("useLocationStore", () => {
   const mapStore = useMapStore();  
   const { data, status, refresh } = useFetch<Array<{ 
     id: string;
+    slug: string,
     name: string;
     description: string;
     lat: number;
@@ -22,6 +23,7 @@ export const useLocationStore = defineStore("useLocationStore", () => {
         label: location.name,
         icon: "tabler:map-pin-filled",
         href: "#",
+        to: { name: 'dashboard-location-slug', params: { slug: location.slug } },
         location,
       }));
       mapStore.mapPoints = data.value;
