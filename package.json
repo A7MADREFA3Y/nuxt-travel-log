@@ -11,6 +11,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "typecheck": "nuxi typecheck",
     "prepare": "husky"
   },
   "dependencies": {
@@ -49,7 +50,8 @@
     "lint-staged": "^16.2.7",
     "nuxt": "3.12.4",
     "nuxt-maplibre": "1.1.1",
-    "pinia": "3.0.1"
+    "pinia": "3.0.1",
+    "vue-tsc": "3.0.1"
   },
   "lint-staged": {
     "*": "pnpm lint"
