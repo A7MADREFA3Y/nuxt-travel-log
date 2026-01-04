@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
-import { useLocationStore } from '~/stores/location';
-import { useMapStore } from '~/stores/map';
-
-const locationStore = useLocationStore();
+  import { storeToRefs } from 'pinia';
+  import { useLocationStore } from '~/stores/location';
+  import { useMapStore } from '~/stores/map';
+const locationsStore = useLocationStore();
 const mapStore = useMapStore();
-const { locations, status } = storeToRefs(locationStore);
+const { locations, status } = storeToRefs(locationsStore);
 
-onMounted(() =>{
-    locationStore.refresh()
-})
+onMounted(() => {
+  locationsStore.refresh();
+});
 </script>
 
 
@@ -26,12 +25,12 @@ onMounted(() =>{
         v-for="location in locations"
         :key="location.id"
         class="card card-compact bg-base-300 h-40 border-2 w-72 mb-2 shrink-0 hover:cursor-pointer"
-        :to="{name: 'dashboard-location-slug', params: { slug: location.slug}}"
+        :to="{ name: 'dashboard-location-slug', params: { slug: location.slug } }"
         :class="{
-          'border-accent': location === mapStore.selectedPoint,
-          'border-transparent': location !== mapStore.selectedPoint,
+          'border-accent': isPointSelected(location, mapStore.selectedPoint),
+          'border-transparent': !isPointSelected(location, mapStore.selectedPoint),
         }"
-        @mouseenter="mapStore.selectedPoint = location"
+        @mouseenter="mapStore.selectedPoint = createMapPointFromLocation(location)"
         @mouseleave="mapStore.selectedPoint = null"
       >
         <div class="card-body">
