@@ -1,4 +1,3 @@
-import slug from "slug";
 import { findLocation } from "~/lib/db/queries/location";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
