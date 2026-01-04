@@ -14,7 +14,7 @@ onMounted(() =>{
 
 
 <template>
-  <div class="p-4">
+  <div class="p-4 min-h-64">
     <h2 class="text-2xl">
       Locations
     </h2>
