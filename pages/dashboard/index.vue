@@ -1,16 +1,18 @@
 <script lang="ts" setup>
-  import { storeToRefs } from 'pinia';
-  import { useLocationStore } from '~/stores/location';
-  import { useMapStore } from '~/stores/map';
+
+
+import { storeToRefs } from 'pinia';
+import { useLocationStore } from '~/stores/locations';
+import { useMapStore } from '~/stores/map';
+
 const locationsStore = useLocationStore();
 const mapStore = useMapStore();
-const { locations, status } = storeToRefs(locationsStore);
+const { locations, locationsStatus: status } = storeToRefs(locationsStore);
 
 onMounted(() => {
-  locationsStore.refresh();
+  locationsStore.refreshLocations();
 });
 </script>
-
 
 <template>
   <div class="p-4 min-h-64">
