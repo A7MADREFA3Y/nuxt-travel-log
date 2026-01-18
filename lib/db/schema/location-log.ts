@@ -1,28 +1,28 @@
-import { int, real , sqliteTable, text } from "drizzle-orm/sqlite-core";
-
-import { location } from "./location";
-import { user } from "./auth";
 import { relations } from "drizzle-orm";
+import { int, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+import { user } from "./auth";
+import { location } from "./location";
 
 export const locationLog = sqliteTable("locationLog", {
-    id: int().primaryKey({ autoIncrement: true }),
-    name: text().notNull(),
-    startedAt: int().notNull(),
-    endedAt: int().notNull(),
-    slug: text().notNull().unique(),
-    description: text(),
-    lat: real().notNull(),
-    long: real().notNull(),
-    userId: int().notNull().references(() => user.id),
-    locationId: int().notNull().references(() => location.id),
-    createdAt: int().notNull().$default(() => Date.now()),
-    updatedAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
-
+  id: int().primaryKey({ autoIncrement: true }),
+  name: text().notNull(),
+  description: text(),
+  startedAt: int().notNull(),
+  endedAt: int().notNull(),
+  lat: real().notNull(),
+  long: real().notNull(),
+  locationId: int().notNull().references(() => location.id),
+  userId: int().notNull().references(() => user.id),
+  createdAt: int().notNull().$default(() => Date.now()),
+  updatedAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
 });
 
-export const locationLogRelation = relations(locationLog, ({ one }) => ({
-    location: one(location, {
-        fields: [locationLog.locationId],
-        references: [location.id],
-    })
-}))
+export const locationLogRelations = relations(locationLog, ({ one }) => ({
+  location: one(location, {
+    fields: [locationLog.locationId],
+    references: [location.id],
+  }),
+}));
+
+export type SelectLocationLog = typeof locationLog.$inferSelect;
