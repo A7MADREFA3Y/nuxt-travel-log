@@ -15,7 +15,8 @@ const isOpen = ref(false);
 const deleteError = ref("");
 const isDeleting = ref(false);
 
-const loading = computed(() => isDeleting.value || status.value === "pending");
+const loading = computed(() => status.value === "pending" || isDeleting.value);
+const errorMessage = computed(() => error.value?.statusMessage || deleteError.value);
 
 onMounted(() => {
   locationStore.refreshCurrentLocation();
@@ -34,7 +35,6 @@ async function confirmDelete() {
     await $fetch(`/api/locations/${route.params.slug}`, {
       method: "DELETE",
     });
-
     navigateTo("/dashboard");
   }
   catch (e) {
@@ -56,9 +56,9 @@ onBeforeRouteUpdate((to) => {
     <div v-if="loading">
       <div class="loading" />
     </div>
-    <div v-if="(error || deleteError) && !loading" class="alert alert-error">
+    <div v-if="errorMessage && !loading" class="alert alert-error">
       <h2 class="text-lg">
-        {{ error?.statusMessage || deleteError }}
+        {{ errorMessage }}
       </h2>
     </div>
     <div v-if="route.name === 'dashboard-location-slug' && location && !loading">
@@ -100,11 +100,17 @@ onBeforeRouteUpdate((to) => {
         <p class="text-sm italic">
           Add a location log to get started.
         </p>
+        <NuxtLink
+          class="btn btn-primary mt-2"
+          :to="{
+            name: 'dashboard-location-slug-add',
+            params: { slug: route.params.slug },
+          }"
+        >
+          Add Location Log
+          <Icon name="tabler:map-pin-plus" size="24" />
+        </NuxtLink>
       </div>
-      <button class="btn btn-primary mt-2">
-        Add Location Log
-        <Icon name="tabler:map-pin-plus" size="24" />
-      </button>
     </div>
     <div v-if="route.name !== 'dashboard-location-slug'">
       <NuxtPage />

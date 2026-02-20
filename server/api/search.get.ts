@@ -1,4 +1,4 @@
-import { SearchSchema } from "~/lib/zod-schema";
+import { SearchSchema } from "~/lib/zod-schemas";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 import sendZodError from "~/utils/send-zod-error";
 import type { NominatimResult } from "~/lib/types";

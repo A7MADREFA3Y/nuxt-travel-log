@@ -5,6 +5,7 @@ import type { InsertLocation } from "../schema";
 
 import db from "..";
 import { location } from "../schema";
+import { locationLog } from "../schema/location-log";
 
 const nanoid = customAlphabet("1234567890abcdefghijklmnopqrstuvwxyz", 5);
 
@@ -85,6 +86,16 @@ export async function removeLocationBySlug(
   slug: string,
   userId: number,
 ) {
+  // First, find the location to get its ID
+  const loc = await findLocation(slug, userId);
+  if (!loc) {
+    return null;
+  }
+
+  // Delete all associated location logs first (to handle foreign key constraint)
+  await db.delete(locationLog).where(eq(locationLog.locationId, loc.id));
+
+  // Then delete the location
   const [removed] = await db.delete(location).where(and(
     eq(location.slug, slug),
     eq(location.userId, userId),
