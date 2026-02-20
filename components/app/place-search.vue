@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { FetchError } from "ofetch"
-import { SearchSchema } from '~/lib/zod-schema';
+import { SearchSchema } from '~/lib/zod-schemas';
 import type { NominatimResult } from "~/lib/types"
 import { useTemplateRef } from 'vue';
 const emit = defineEmits<{
