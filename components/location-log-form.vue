@@ -10,7 +10,7 @@ const props = defineProps<{
   submitIcon: string;
 }>();
 
-const initialValues = {
+const defaultValues = {
   name: "",
   description: "",
   startedAt: Date.now() - (24 * 60 * 60 * 1000),
@@ -18,6 +18,8 @@ const initialValues = {
   long: (CENTRAL_GERMANY as [number, number])[0],
   lat: (CENTRAL_GERMANY  as [number, number])[1],
 };
+
+const initialValues = computed(() => props.initialValues || defaultValues);
 </script>
 
 <template>
@@ -25,7 +27,7 @@ const initialValues = {
     v-slot="{ errors, loading }"
     :zoom="11"
     :schema="InsertLocationLog"
-    :initial-values="props.initialValues || initialValues"
+    :initial-values="initialValues"
     :on-submit
     :on-submit-complete
     :submit-label

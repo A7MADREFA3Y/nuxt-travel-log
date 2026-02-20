@@ -30,11 +30,11 @@ const { handleSubmit, errors, meta, setErrors, setFieldValue, controlledValues }
   initialValues: props.initialValues,
 });
 
-const onSubmit = handleSubmit(async (values: T) => {
+const onSubmit = handleSubmit(async (values) => {
   try {
     submitError.value = "";
     loading.value = true;
-    await props.onSubmit(values);
+    await props.onSubmit(values as T);
     submitted.value = true;
     props.onSubmitComplete();
   }
@@ -106,6 +106,17 @@ onBeforeRouteLeave(() => {
     <span>{{ submitError }}</span>
   </div>
   <form class="flex flex-col gap-2" @submit.prevent="onSubmit">
+    <!-- Hidden fields for coordinates managed by map via setFieldValue -->
+    <Field
+      name="lat"
+      as="input"
+      type="hidden"
+    />
+    <Field
+      name="long"
+      as="input"
+      type="hidden"
+    />
     <slot :errors :loading />
     <p class="text-xs text-gray-400">
       Current coordinates: {{ formatNumber(controlledValues.lat) }}, {{ formatNumber(controlledValues.long) }}
