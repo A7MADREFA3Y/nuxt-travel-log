@@ -5,9 +5,11 @@ import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-
 import sendZodError from "~/utils/send-zod-error";
 
 export default defineAuthenticatedEventHandler(async (event) => {
-  const slug = getRouterParam(event, "slug") as string;
-  const location = await findLocation(slug, event.context.user.id);
 
+  const slug = getRouterParam(event, "slug") as string;
+
+  const location = await findLocation(slug, event.context.user.id);
+  
   if (!location) {
     return sendError(event, createError({
       statusCode: 404,

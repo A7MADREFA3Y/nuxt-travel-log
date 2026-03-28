@@ -12,9 +12,11 @@ import { location } from "./location";
 export const locationLog = sqliteTable("locationLog", {
   id: int().primaryKey({ autoIncrement: true }),
   name: text().notNull(),
-  description: text(),
   startedAt: int().notNull(),
   endedAt: int().notNull(),
+  // necessarySlug
+  slug: text().notNull(),
+  description: text(),
   lat: real().notNull(),
   long: real().notNull(),
   locationId: int().notNull().references(() => location.id),
@@ -39,6 +41,7 @@ export const InsertLocationLog = createInsertSchema(locationLog, {
   id: true,
   userId: true,
   locationId: true,
+  slug: true,
   createdAt: true,
   updatedAt: true,
 }).superRefine((values, context) => {
