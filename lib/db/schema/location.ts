@@ -5,10 +5,11 @@ import { createInsertSchema } from "drizzle-zod";
 
 import { DescriptionSchema, LatSchema, LongSchema, NameSchema } from "~/lib/zod-schemas";
 
-import type { SelectLocationLog } from "./location-log";
-
 import { user } from "./auth";
 import { locationLog } from "./location-log";
+
+import type { SelectLocationLog } from "./location-log";
+
 
 export const location = sqliteTable("location", {
   id: int().primaryKey({ autoIncrement: true }),
