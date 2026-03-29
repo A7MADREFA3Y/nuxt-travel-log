@@ -2,7 +2,6 @@
 import {storeToRefs} from "pinia";
 import { useLocationStore } from '~/stores/locations';
 
-
 const route = useRoute();
 const locationStore = useLocationStore();
 const {
@@ -14,8 +13,10 @@ const {
 const loading = computed(() => status.value === "pending");
 const errorMessage = computed(() => error.value?.statusMessage);
 
-onMounted(() => {
-  locationStore.refreshCurrentLocationLog();
+onBeforeRouteUpdate((to) => {
+  if (to.name === "dashboard-location-slug-id") {
+    locationStore.refreshCurrentLocationLog();
+  }
 });
 </script>
 
@@ -44,6 +45,9 @@ onMounted(() => {
       <p class="text-sm">
         {{ locationLog.description }}
       </p>
+    </div>
+    <div v-else>
+      <NuxtPage />
     </div>
   </div>
 </template>
